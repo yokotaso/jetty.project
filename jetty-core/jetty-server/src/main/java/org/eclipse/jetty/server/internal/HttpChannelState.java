@@ -667,7 +667,7 @@ public class HttpChannelState implements HttpChannel, Components
             {
                 assert _callbackCompleted;
                 _streamSendState = StreamSendState.LAST_COMPLETE;
-                completeStream = _handling == null;
+                completeStream = _handling == null && _stream != null;
                 stream = _stream;
             }
 
@@ -687,7 +687,7 @@ public class HttpChannelState implements HttpChannel, Components
             {
                 assert _callbackCompleted;
                 _streamSendState = StreamSendState.LAST_COMPLETE;
-                completeStream = _handling == null;
+                completeStream = _handling == null && _stream != null;
                 stream = _stream;
                 failure = _callbackFailure = ExceptionUtil.combine(_callbackFailure, failure);
             }
