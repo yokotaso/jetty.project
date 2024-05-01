@@ -562,8 +562,10 @@ public class HttpConnection extends AbstractMetaDataConnection implements Runnab
         if (LOG.isDebugEnabled())
             LOG.debug("{} parse {}", this, _retainableByteBuffer);
 
-        if (_parser.isTerminated())
-            throw new RuntimeIOException("Parser is terminated");
+        if (_parser.isTerminated()) {
+            LOG.debug("Parser is terminated");
+            return false;
+        }
 
         boolean handle = _parser.parseNext(_retainableByteBuffer == null ? BufferUtil.EMPTY_BUFFER : _retainableByteBuffer.getByteBuffer());
 
